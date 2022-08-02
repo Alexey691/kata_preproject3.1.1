@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+
+</head>
+<body>
+<br>
+<h1>Users</h1>
+<table border="2">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Age</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getId}"></td>
+        <td th:utext="${user.getName}"></td>
+        <td th:utext="${user.getLastname}"></td>
+        <td th:utext="${user.getAge}"></td>
+        <td><a th:href="@{update{id}(id=${user.getId})}">edit</a>
+        </td>
+        <td><a th:href="@{delete/{id}(id=${user.getId})}">delete</a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+<br>
+<button><a href="/add">Add user</a></button>
+<br>
+</body>
+</html>
