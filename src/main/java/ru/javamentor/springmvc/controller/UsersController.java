@@ -2,9 +2,7 @@ package ru.javamentor.springmvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.springmvc.models.User;
 import ru.javamentor.springmvc.service.UserService;
 
@@ -26,7 +24,8 @@ public class UsersController {
     }
 
     @GetMapping("add")
-    public String createAddUserForm(User user) {
+    public String createAddUserForm(User user, Model model) {
+        model.addAttribute("user", user);
         return "/adduser";
     }
 
@@ -36,7 +35,7 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("delete/{id}")
+    @DeleteMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.delUser(id);
         return "redirect:/";
@@ -50,7 +49,7 @@ public class UsersController {
         return "/update";
     }
 
-    @PostMapping("update")
+    @PutMapping("update")
     public String updateUser(User user) {
         userService.updUser(user);
         return "redirect:/";
